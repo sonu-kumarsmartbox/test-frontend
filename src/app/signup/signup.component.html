@@ -1,0 +1,63 @@
+<div class="col-lg-4 offset-lg-4">
+  <h4 class="text-center">Signup Here</h4>
+  <div class="alert alert-danger" *ngIf = "hasError" role="alert">
+  Please fill out all the details.
+  </div>
+  <div class="alert alert-danger" *ngIf = "isSuccess" role="alert">
+  Sign up Successful.<a [routerLink]="['/login']">Login</a> now.
+  </div>
+<form (ngSubmit)="signup()" novalidate [formGroup]="signupGroup">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Firstname</label>
+    <input type="text" class="form-control" formControlName="firstname"  placeholder="Enter firstname">
+     <div class="feedback" *ngIf="signupGroup.controls['firstname'].invalid && (signupGroup.controls['firstname'].dirty ||signupGroup.controls['firstname'].touched)">
+        Firstname is Required.
+      </div>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Lastname</label>
+    <input type="text" class="form-control" formControlName="lastname"  placeholder="Enter lastname">
+    <div class="feedback" *ngIf="signupGroup.controls['lastname'].invalid && (signupGroup.controls['lastname'].dirty ||signupGroup.controls['lastname'].touched)">
+        Lastname is Required.
+      </div>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" class="form-control" formControlName="email" placeholder="Enter email">
+    <div class="feedback" *ngIf="signupGroup.controls['email'].errors && (signupGroup.controls['email'].dirty ||signupGroup.controls['email'].touched)">
+        <span *ngIf="signupGroup.controls['email'].errors?.required">
+          Email is Required.
+        </span>
+        <span *ngIf="signupGroup.controls['email'].errors?.pattern">
+          Email is Invalid.
+        </span>
+      </div>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" formControlName="password" placeholder="Password">
+    <div class="feedback" *ngIf="signupGroup.controls['password'].errors && (signupGroup.controls['password'].dirty ||signupGroup.controls['password'].touched)">
+        <span *ngIf="signupGroup.controls['password'].errors?.required">
+          Password is Required.
+        </span>
+        <span *ngIf="signupGroup.controls['password'].errors?.pattern">
+          Password is Invalid. Must be atleast 8 character long and should contain a character, a uppercase and a number.
+        </span>
+       
+      </div>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Confirm Password</label>
+    <input type="password" class="form-control" formControlName="cpassword" placeholder=" Confirm Password">
+     <div class="feedback" *ngIf="signupGroup.controls['cpassword'].invalid && (signupGroup.controls['cpassword'].dirty || signupGroup.controls['cpassword'].touched)">
+  Confirm Password is required.
+</div>
+
+   <div class="feedback" *ngIf="signupGroup.controls['password'].valid  && signupGroup.errors?.mismatch">
+  Passwords Mismatch.
+</div>
+  </div>
+  
+  <button type="submit" class="btn btn-primary">Signup</button>
+</form>
+</div>

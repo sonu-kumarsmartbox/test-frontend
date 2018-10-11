@@ -1,0 +1,17 @@
+<div class="col-lg-8 offset-col-2">
+  <div class="alert alert-success" *ngIf = "isAddedtoDB" role="alert">
+  Product added succesfully.
+  </div>
+  <h3 class="text-center" *ngIf = "products?.length == 0">
+    No products!
+  </h3>
+  <div *ngFor = "let product of products" class="col-lg-4">
+    <app-product 
+    [product]="product" 
+    (addProductEvent)="addProduct($event)"
+    (removeProductEvent) = "removeProduct($event)"
+    >
+    </app-product>
+  </div>
+  <button class="btn btn-block btn-primary" (click)="addtoMyProducts()">Add to My products</button>
+</div>
